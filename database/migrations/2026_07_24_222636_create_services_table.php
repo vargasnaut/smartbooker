@@ -12,8 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('services', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id();
+        $table->foreignId('business_id')->constrained()->onDelete('cascade');
+        $table->string('name');
+        $table->decimal('price', 10, 2);
+        $table->integer('duration_minutes');
+        $table->integer('padding_minutes')->default(0); // Tiempo de colchón entre citas
+        $table->boolean('is_active')->default(true);
+        $table->timestamps();
         });
     }
 

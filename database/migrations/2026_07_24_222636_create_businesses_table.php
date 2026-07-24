@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('businesses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        $table->id();
+        $table->foreignId('owner_id')->constrained('users')->onDelete('cascade');
+        $table->string('name');
+        $table->string('slug')->unique();
+        $table->string('time_zone')->default('America/Lima');
+        $table->boolean('is_active')->default(true);
+        $table->timestamps();
         });
     }
 
