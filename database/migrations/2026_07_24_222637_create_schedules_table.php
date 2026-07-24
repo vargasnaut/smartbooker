@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('staff_id')->constrained('staff')->onDelete('cascade');
+            $table->tinyInteger('day_of_week'); // 0=Domingo, 1=Lunes, etc.
+            $table->time('start_time');
+            $table->time('end_time');
+            $table->boolean('is_working_day')->default(true);
             $table->timestamps();
         });
     }

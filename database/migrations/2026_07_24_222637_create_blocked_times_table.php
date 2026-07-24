@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('blocked_times', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('staff_id')->constrained('staff')->onDelete('cascade');
+            $table->dateTime('start_datetime');
+            $table->dateTime('end_datetime');
+            $table->string('reason')->nullable();
             $table->timestamps();
         });
     }
